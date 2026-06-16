@@ -1,0 +1,71 @@
+# --- Python ---
+# Bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+*.so
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Python package manager files
+*.egg-info/
+dist/
+build/
+*.egg
+
+# --- IDE / Editor ---
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm / IntelliJ
+.idea/
+*.iml
+
+# --- OS junk ---
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Linux
+.directory
+
+# --- Docker / Local volumes (CRITICAL) ---
+# These are large local database files – you DO NOT want to push them
+fuseki-data/
+data/
+staging/
+*.db
+*.tdb
+*.nq
+*.trig
+
+# --- Environment / Secrets ---
+.env
+*.env
+.env.local
+.env.*.local
+*.secret
+*.pem
+
+# --- Logs and temporary files ---
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
