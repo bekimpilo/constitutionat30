@@ -1,5 +1,3 @@
----
-
 ## 📘 MCP Server README.md (`mcp-server/README.md`)
 
 ```markdown
