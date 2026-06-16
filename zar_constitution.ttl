@@ -1,0 +1,2151 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+@prefix saont: <https://od2og.africa/ontology/> .
+@prefix sec:   <https://od2og.africa/constitution/section/> .
+@prefix ch:    <https://od2og.africa/constitution/chapter/> .
+@prefix con:   <https://od2og.africa/constitution/> .
+
+
+# ONTOLOGY (minimal GraphRAG legal model)
+
+saont:Section rdf:type owl:Class .
+saont:Provision rdf:type owl:Class .
+
+saont:hasPart rdf:type owl:ObjectProperty .
+saont:partOf rdf:type owl:ObjectProperty .
+
+saont:protects rdf:type owl:ObjectProperty .
+saont:mentions rdf:type owl:ObjectProperty .
+
+saont:legalText rdf:type owl:DatatypeProperty .
+saont:orderIndex rdf:type owl:DatatypeProperty .
+saont:references rdf:type owl:ObjectProperty .
+
+
+# ROOT CONSTITUTION
+
+con:SAConstitution1996
+    rdf:type saont:Constitution ;
+    dct:title "Constitution of the Republic of South Africa, 1996" ;
+    saont:hasPart ch:1 , ch:2 .
+
+
+# CHAPTER 1 (Founding Provisions)
+
+ch:1
+    rdf:type saont:Chapter ;
+    dct:title "Founding Provisions" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:1 , sec:2 , sec:3 , sec:4 , sec:5 , sec:6 .
+
+# SECTION 1
+
+sec:1
+    rdf:type saont:Section ;
+    dct:title "Republic of South Africa" ;
+    dct:identifier "section 1" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:1_a , sec:1_b , sec:1_c , sec:1_d .
+
+sec:1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:1 ;
+    dct:identifier "section 1(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Human dignity, the achievement of equality and the advancement of human rights and freedoms." .
+
+sec:1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:1 ;
+    dct:identifier "section 1(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "Non-racialism and non-sexism." .
+
+sec:1_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:1 ;
+    dct:identifier "section 1(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "Supremacy of the constitution and the rule of law." .
+
+sec:1_d
+    rdf:type saont:Provision ;
+    saont:partOf sec:1 ;
+    dct:identifier "section 1(d)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "Universal adult suffrage, a national common voters roll, regular elections and a multi-party system of democratic government, to ensure accountability, responsiveness and openness." .
+
+# SECTION 2
+
+sec:2
+    rdf:type saont:Section ;
+    dct:title "Supremacy of Constitution" ;
+    dct:identifier "section 2" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:2_1 .
+
+sec:2_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:2 ;
+    dct:identifier "section 2(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "This Constitution is the supreme law of the Republic; law or conduct inconsistent with it is invalid, and the obligations imposed by it must be fulfilled." .
+
+# SECTION 3
+
+sec:3
+    rdf:type saont:Section ;
+    dct:title "Citizenship" ;
+    dct:identifier "section 3" ;
+    saont:orderIndex 3 ;
+    saont:hasPart sec:3_1 , sec:3_2 , sec:3_3 .
+
+sec:3_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:3 ;
+    dct:identifier "section 3(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "There is a common South African citizenship." .
+
+sec:3_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:3 ;
+    dct:identifier "section 3(2)" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:3_2_a , sec:3_2_b ;
+    saont:legalText "All citizens are equally entitled to the rights, privileges and benefits of citizenship; and equally subject to the duties and responsibilities of citizenship." .
+
+sec:3_2_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:3_2 ;
+    dct:identifier "section 3(2)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "equally entitled to the rights, privileges and benefits of citizenship; and" .
+
+sec:3_2_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:3_2 ;
+    dct:identifier "section 3(2)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "equally subject to the duties and responsibilities of citizenship." .
+
+sec:3_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:3 ;
+    dct:identifier "section 3(3)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "National legislation must provide for the acquisition, loss and restoration of citizenship." .
+
+# SECTION 4
+
+sec:4
+    rdf:type saont:Section ;
+    dct:title "National Anthem" ;
+    dct:identifier "section 4" ;
+    saont:orderIndex 4 ;
+    saont:hasPart sec:4_1 .
+
+sec:4_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:4 ;
+    dct:identifier "section 4(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "The national anthem of the Republic is determined by the President by proclamation." .
+
+# SECTION 5
+
+sec:5
+    rdf:type saont:Section ;
+    dct:title "National Flag" ;
+    dct:identifier "section 5" ;
+    saont:orderIndex 5 ;
+    saont:hasPart sec:5_1 .
+
+sec:5_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:5 ;
+    dct:identifier "section 5(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "The national flag of the Republic is black, gold, green, white, red and blue, as described and sketched in Schedule 1." .
+
+# SECTION 6
+
+sec:6
+    rdf:type saont:Section ;
+    dct:title "Languages" ;
+    dct:identifier "section 6" ;
+    saont:orderIndex 6 ;
+    saont:hasPart sec:6_1 , sec:6_2 , sec:6_3 , sec:6_4 , sec:6_5 .
+
+sec:6_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:6 ;
+    dct:identifier "section 6(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "The official languages of the Republic are Sepedi, Sesotho, Setswana, siSwati, Tshivenda, Xitsonga, Afrikaans, English, isiNdebele, isiXhosa and isiZulu." .
+
+sec:6_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:6 ;
+    dct:identifier "section 6(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "Recognising the historically diminished use and status of the indigenous languages of our people, the state must take practical and positive measures to elevate the status and advance the use of these languages." .
+
+sec:6_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:6 ;
+    dct:identifier "section 6(3)" ;
+    saont:orderIndex 3 ;
+    saont:hasPart sec:6_3_a , sec:6_3_b ;
+    saont:legalText "Municipalities must take into account the language usage and preferences of their residents. The national government and provincial governments may use any particular official languages for the purposes of government, taking into account usage, practicality, expense, regional circumstances and the balance of the needs and preferences of the population as a whole or in the province concerned; but the national government and each provincial government must use at least two official languages." .
+
+sec:6_3_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:6_3 ;
+    dct:identifier "section 6(3)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Municipalities must take into account the language usage and preferences of their residents." .
+
+sec:6_3_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:6_3 ;
+    dct:identifier "section 6(3)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "The national government and provincial governments may use any particular official languages for the purposes of government, taking into account usage, practicality, expense, regional circumstances and the balance of the needs and preferences of the population as a whole or in the province concerned; but the national government and each provincial government must use at least two official languages." .
+
+sec:6_4
+    rdf:type saont:Provision ;
+    saont:partOf sec:6 ;
+    dct:identifier "section 6(4)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "The national government and provincial governments, by legislative and other measures, must regulate and monitor their use of official languages. Without detracting from the provisions of subsection (2), all official languages must enjoy parity of esteem and must be treated equitably." .
+
+sec:6_5
+    rdf:type saont:Provision ;
+    saont:partOf sec:6 ;
+    dct:identifier "section 6(5)" ;
+    saont:orderIndex 5 ;
+    saont:hasPart sec:6_5_a , sec:6_5_b ;
+    saont:legalText "A Pan South African Language Board established by national legislation must promote, and create conditions for, the development and use of all official languages; the Khoi, Nama and San languages; and sign language; and promote and ensure respect for all languages commonly used by communities in South Africa, including German, Greek, Gujarati, Hindi, Portuguese, Tamil, Telegu and Urdu; and Arabic, Hebrew, Sanskrit and other languages used for religious purposes in South Africa." .
+
+sec:6_5_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:6_5 ;
+    dct:identifier "section 6(5)(a)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:6_5_a_i , sec:6_5_a_ii , sec:6_5_a_iii ;
+    saont:legalText "promote, and create conditions for, the development and use of all official languages; the Khoi, Nama and San languages; and sign language; and" .
+
+sec:6_5_a_i
+    rdf:type saont:Provision ;
+    saont:partOf sec:6_5_a ;
+    dct:identifier "section 6(5)(a)(i)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "all official languages;" .
+
+sec:6_5_a_ii
+    rdf:type saont:Provision ;
+    saont:partOf sec:6_5_a ;
+    dct:identifier "section 6(5)(a)(ii)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "the Khoi, Nama and San languages; and" .
+
+sec:6_5_a_iii
+    rdf:type saont:Provision ;
+    saont:partOf sec:6_5_a ;
+    dct:identifier "section 6(5)(a)(iii)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "sign language ; and" .
+
+sec:6_5_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:6_5 ;
+    dct:identifier "section 6(5)(b)" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:6_5_b_i , sec:6_5_b_ii ;
+    saont:legalText "promote and ensure respect for all languages commonly used by communities in South Africa, including German, Greek, Gujarati, Hindi, Portuguese, Tamil, Telegu and Urdu; and Arabic, Hebrew, Sanskrit and other languages used for religious purposes in South Africa." .
+
+sec:6_5_b_i
+    rdf:type saont:Provision ;
+    saont:partOf sec:6_5_b ;
+    dct:identifier "section 6(5)(b)(i)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "all languages commonly used by communities in South Africa, including German, Greek, Gujarati, Hindi, Portuguese, Tamil, Telegu and Urdu; and" .
+
+sec:6_5_b_ii
+    rdf:type saont:Provision ;
+    saont:partOf sec:6_5_b ;
+    dct:identifier "section 6(5)(b)(ii)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "Arabic, Hebrew, Sanskrit and other languages used for religious purposes in South Africa." .
+
+
+# CHAPTER 2 (BILL OF RIGHTS)
+
+ch:2
+    rdf:type saont:Chapter ;
+    dct:title "Bill of Rights" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:7 , sec:8 , sec:9 , sec:10 , sec:11 , sec:12 , sec:13 , sec:14 , sec:15 , sec:16 , sec:17 , sec:18 , sec:19 , sec:20 , sec:21 , sec:22 , sec:23 , sec:24 , sec:25 , sec:26 , sec:27 , sec:28 , sec:29 , sec:30 , sec:31 , sec:32 , sec:33 , sec:34 , sec:35 , sec:36 , sec:37 , sec:38 , sec:39 .
+
+# SECTION 7
+
+sec:7
+    rdf:type saont:Section ;
+    dct:title "Rights" ;
+    dct:identifier "section 7" ;
+    saont:orderIndex 7 ;
+    saont:hasPart sec:7_1 , sec:7_2 , sec:7_3 .
+
+sec:7_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:7 ;
+    dct:identifier "section 7(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "This Bill of Rights is a cornerstone of democracy in South Africa. It enshrines the rights of all people in our country and affirms the democratic values of human dignity, equality and freedom." .
+
+sec:7_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:7 ;
+    dct:identifier "section 7(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "The state must respect, protect, promote and fulfil the rights in the Bill of Rights." .
+
+sec:7_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:7 ;
+    dct:identifier "section 7(3)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "The rights in the Bill of Rights are subject to the limitations contained or referred to in section 36, or elsewhere in the Bill." ;
+    saont:references sec:36 .
+
+# SECTION 8
+
+sec:8
+    rdf:type saont:Section ;
+    dct:title "Application" ;
+    dct:identifier "section 8" ;
+    saont:orderIndex 8 ;
+    saont:hasPart sec:8_1 , sec:8_2 , sec:8_3 , sec:8_4 .
+
+sec:8_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:8 ;
+    dct:identifier "section 8(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "The Bill of Rights applies to all law, and binds the legislature, the executive, the judiciary and all organs of state." .
+
+sec:8_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:8 ;
+    dct:identifier "section 8(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "A provision of the Bill of Rights binds a natural or a juristic person if, and to the extent that, it is applicable, taking into account the nature of the right and the nature of any duty imposed by the right." .
+
+sec:8_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:8 ;
+    dct:identifier "section 8(3)" ;
+    saont:orderIndex 3 ;
+    saont:hasPart sec:8_3_a , sec:8_3_b ;
+    saont:legalText "When applying a provision of the Bill of Rights to a natural or juristic person in terms of subsection (2), a court in order to give effect to a right in the Bill, must apply, or if necessary develop, the common law to the extent that legislation does not give effect to that right; and may develop rules of the common law to limit the right, provided that the limitation is in accordance with section 36(1)." ;
+    saont:references sec:36_1 .
+
+sec:8_3_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:8_3 ;
+    dct:identifier "section 8(3)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "in order to give effect to a right in the Bill, must apply, or if necessary develop, the common law to the extent that legislation does not give effect to that right; and" .
+
+sec:8_3_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:8_3 ;
+    dct:identifier "section 8(3)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "may develop rules of the common law to limit the right, provided that the limitation is in accordance with section 36(1)." ;
+    saont:references sec:36_1 .
+
+sec:8_4
+    rdf:type saont:Provision ;
+    saont:partOf sec:8 ;
+    dct:identifier "section 8(4)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "A juristic person is entitled to the rights in the Bill of Rights to the extent required by the nature of the rights and the nature of that juristic person." .
+
+# SECTION 9
+
+sec:9
+    rdf:type saont:Section ;
+    dct:title "Equality" ;
+    dct:identifier "section 9" ;
+    saont:orderIndex 9 ;
+    saont:hasPart sec:9_1 , sec:9_2 , sec:9_3 , sec:9_4 , sec:9_5 .
+
+sec:9_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:9 ;
+    dct:identifier "section 9(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone is equal before the law and has the right to equal protection and benefit of the law." .
+
+sec:9_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:9 ;
+    dct:identifier "section 9(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "Equality includes the full and equal enjoyment of all rights and freedoms. To promote the achievement of equality, legislative and other measures designed to protect or advance persons, or categories of persons, disadvantaged by unfair discrimination may be taken." .
+
+sec:9_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:9 ;
+    dct:identifier "section 9(3)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "The state may not unfairly discriminate directly or indirectly against anyone on one or more grounds, including race, gender, sex, pregnancy, marital status, ethnic or social origin, colour, sexual orientation, age, disability, religion, conscience, belief, culture, language and birth." .
+
+sec:9_4
+    rdf:type saont:Provision ;
+    saont:partOf sec:9 ;
+    dct:identifier "section 9(4)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "No person may unfairly discriminate directly or indirectly against anyone on one or more grounds in terms of subsection (3). National legislation must be enacted to prevent or prohibit unfair discrimination." .
+
+sec:9_5
+    rdf:type saont:Provision ;
+    saont:partOf sec:9 ;
+    dct:identifier "section 9(5)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "Discrimination on one or more of the grounds listed in subsection (3) is unfair unless it is established that the discrimination is fair." .
+
+# SECTION 10
+
+sec:10
+    rdf:type saont:Section ;
+    dct:title "Human Dignity" ;
+    dct:identifier "section 10" ;
+    saont:orderIndex 10 ;
+    saont:hasPart sec:10_1 .
+
+sec:10_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:10 ;
+    dct:identifier "section 10(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone has inherent dignity and the right to have their dignity respected and protected." .
+
+# SECTION 11
+
+sec:11
+    rdf:type saont:Section ;
+    dct:title "Life" ;
+    dct:identifier "section 11" ;
+    saont:orderIndex 11 ;
+    saont:hasPart sec:11_1 .
+
+sec:11_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:11 ;
+    dct:identifier "section 11(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone has the right to life." .
+
+# SECTION 12
+
+sec:12
+    rdf:type saont:Section ;
+    dct:title "Freedom and security of the person" ;
+    dct:identifier "section 12" ;
+    saont:orderIndex 12 ;
+    saont:hasPart sec:12_1 , sec:12_2 .
+
+sec:12_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:12 ;
+    dct:identifier "section 12(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:12_1_a , sec:12_1_b , sec:12_1_c , sec:12_1_d , sec:12_1_e ;
+    saont:legalText "Everyone has the right to freedom and security of the person, which includes the right not to be deprived of freedom arbitrarily or without just cause; not to be detained without trial; to be free from all forms of violence from either public or private sources; not to be tortured in any way; and not to be treated or punished in a cruel, inhuman or degrading way." .
+
+sec:12_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:12_1 ;
+    dct:identifier "section 12(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "not to be deprived of freedom arbitrarily or without just cause;" .
+
+sec:12_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:12_1 ;
+    dct:identifier "section 12(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "not to be detained without trial;" .
+
+sec:12_1_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:12_1 ;
+    dct:identifier "section 12(1)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "to be free from all forms of violence from either public or private sources;" .
+
+sec:12_1_d
+    rdf:type saont:Provision ;
+    saont:partOf sec:12_1 ;
+    dct:identifier "section 12(1)(d)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "not to be tortured in any way; and" .
+
+sec:12_1_e
+    rdf:type saont:Provision ;
+    saont:partOf sec:12_1 ;
+    dct:identifier "section 12(1)(e)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "not to be treated or punished in a cruel, inhuman or degrading way." .
+
+sec:12_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:12 ;
+    dct:identifier "section 12(2)" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:12_2_a , sec:12_2_b , sec:12_2_c ;
+    saont:legalText "Everyone has the right to bodily and psychological integrity, which includes the right to make decisions concerning reproduction; to security in and control over their body; and not to be subjected to medical or scientific experiments without their informed consent." .
+
+sec:12_2_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:12_2 ;
+    dct:identifier "section 12(2)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to make decisions concerning reproduction;" .
+
+sec:12_2_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:12_2 ;
+    dct:identifier "section 12(2)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "to security in and control over their body; and" .
+
+sec:12_2_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:12_2 ;
+    dct:identifier "section 12(2)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "not to be subjected to medical or scientific experiments without their informed consent." .
+
+# SECTION 13
+
+sec:13
+    rdf:type saont:Section ;
+    dct:title "Slavery, servitude and forced labour" ;
+    dct:identifier "section 13" ;
+    saont:orderIndex 13 ;
+    saont:hasPart sec:13_1 .
+
+sec:13_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:13 ;
+    dct:identifier "section 13(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "No one may be subjected to slavery, servitude or forced labour." .
+
+# SECTION 14
+
+sec:14
+    rdf:type saont:Section ;
+    dct:title "Privacy" ;
+    dct:identifier "section 14" ;
+    saont:orderIndex 14 ;
+    saont:hasPart sec:14_1 .
+
+sec:14_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:14 ;
+    dct:identifier "section 14(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:14_1_a , sec:14_1_b , sec:14_1_c , sec:14_1_d ;
+    saont:legalText "Everyone has the right to privacy, which includes the right not to have their person or home searched; their property searched; their possessions seized; or the privacy of their communications infringed." .
+
+sec:14_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:14_1 ;
+    dct:identifier "section 14(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "their person or home searched;" .
+
+sec:14_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:14_1 ;
+    dct:identifier "section 14(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "their property searched;" .
+
+sec:14_1_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:14_1 ;
+    dct:identifier "section 14(1)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "their possessions seized; or" .
+
+sec:14_1_d
+    rdf:type saont:Provision ;
+    saont:partOf sec:14_1 ;
+    dct:identifier "section 14(1)(d)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "the privacy of their communications infringed." .
+
+# SECTION 15
+
+sec:15
+    rdf:type saont:Section ;
+    dct:title "Freedom of religion, belief and opinion" ;
+    dct:identifier "section 15" ;
+    saont:orderIndex 15 ;
+    saont:hasPart sec:15_1 , sec:15_2 , sec:15_3 .
+
+sec:15_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:15 ;
+    dct:identifier "section 15(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone has the right to freedom of conscience, religion, thought, belief and opinion." .
+
+sec:15_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:15 ;
+    dct:identifier "section 15(2)" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:15_2_a , sec:15_2_b , sec:15_2_c ;
+    saont:legalText "Religious observances may be conducted at state or state-aided institutions, provided that those observances follow rules made by the appropriate public authorities; they are conducted on an equitable basis; and attendance at them is free and voluntary." .
+
+sec:15_2_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:15_2 ;
+    dct:identifier "section 15(2)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "those observances follow rules made by the appropriate public authorities;" .
+
+sec:15_2_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:15_2 ;
+    dct:identifier "section 15(2)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "they are conducted on an equitable basis; and" .
+
+sec:15_2_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:15_2 ;
+    dct:identifier "section 15(2)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "attendance at them is free and voluntary." .
+
+sec:15_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:15 ;
+    dct:identifier "section 15(3)" ;
+    saont:orderIndex 3 ;
+    saont:hasPart sec:15_3_a , sec:15_3_b ;
+    saont:legalText "This section does not prevent legislation recognising marriages concluded under any tradition, or a system of religious, personal or family law; or systems of personal and family law under any tradition, or adhered to by persons professing a particular religion. Recognition in terms of paragraph (a) must be consistent with this section and the other provisions of the Constitution." .
+
+sec:15_3_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:15_3 ;
+    dct:identifier "section 15(3)(a)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:15_3_a_i , sec:15_3_a_ii ;
+    saont:legalText "marriages concluded under any tradition, or a system of religious, personal or family law; or systems of personal and family law under any tradition, or adhered to by persons professing a particular religion." .
+
+sec:15_3_a_i
+    rdf:type saont:Provision ;
+    saont:partOf sec:15_3_a ;
+    dct:identifier "section 15(3)(a)(i)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "marriages concluded under any tradition, or a system of religious, personal or family law; or" .
+
+sec:15_3_a_ii
+    rdf:type saont:Provision ;
+    saont:partOf sec:15_3_a ;
+    dct:identifier "section 15(3)(a)(ii)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "systems of personal and family law under any tradition, or adhered to by persons professing a particular religion." .
+
+sec:15_3_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:15_3 ;
+    dct:identifier "section 15(3)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "Recognition in terms of paragraph (a) must be consistent with this section and the other provisions of the Constitution." .
+
+# SECTION 16
+
+sec:16
+    rdf:type saont:Section ;
+    dct:title "Freedom of expression" ;
+    dct:identifier "section 16" ;
+    saont:orderIndex 16 ;
+    saont:hasPart sec:16_1 , sec:16_2 .
+
+sec:16_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:16 ;
+    dct:identifier "section 16(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:16_1_a , sec:16_1_b , sec:16_1_c , sec:16_1_d ;
+    saont:legalText "Everyone has the right to freedom of expression, which includes freedom of the press and other media; freedom to receive or impart information or ideas; freedom of artistic creativity; and academic freedom and freedom of scientific research." .
+
+sec:16_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:16_1 ;
+    dct:identifier "section 16(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "freedom of the press and other media;" .
+
+sec:16_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:16_1 ;
+    dct:identifier "section 16(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "freedom to receive or impart information or ideas;" .
+
+sec:16_1_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:16_1 ;
+    dct:identifier "section 16(1)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "freedom of artistic creativity; and" .
+
+sec:16_1_d
+    rdf:type saont:Provision ;
+    saont:partOf sec:16_1 ;
+    dct:identifier "section 16(1)(d)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "academic freedom and freedom of scientific research." .
+
+sec:16_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:16 ;
+    dct:identifier "section 16(2)" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:16_2_a , sec:16_2_b , sec:16_2_c ;
+    saont:legalText "The right in subsection (1) does not extend to propaganda for war; incitement of imminent violence; or advocacy of hatred that is based on race, ethnicity, gender or religion, and that constitutes incitement to cause harm." .
+
+sec:16_2_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:16_2 ;
+    dct:identifier "section 16(2)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "propaganda for war;" .
+
+sec:16_2_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:16_2 ;
+    dct:identifier "section 16(2)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "incitement of imminent violence; or" .
+
+sec:16_2_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:16_2 ;
+    dct:identifier "section 16(2)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "advocacy of hatred that is based on race, ethnicity, gender or religion, and that constitutes incitement to cause harm." .
+
+# SECTION 17
+
+sec:17
+    rdf:type saont:Section ;
+    dct:title "Assembly, demonstration, picket and petition" ;
+    dct:identifier "section 17" ;
+    saont:orderIndex 17 ;
+    saont:hasPart sec:17_1 .
+
+sec:17_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:17 ;
+    dct:identifier "section 17(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone has the right, peacefully and unarmed, to assemble, to demonstrate, to picket and to present petitions." .
+
+# SECTION 18
+
+sec:18
+    rdf:type saont:Section ;
+    dct:title "Freedom of association" ;
+    dct:identifier "section 18" ;
+    saont:orderIndex 18 ;
+    saont:hasPart sec:18_1 .
+
+sec:18_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:18 ;
+    dct:identifier "section 18(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone has the right to freedom of association." .
+
+# SECTION 19
+
+sec:19
+    rdf:type saont:Section ;
+    dct:title "Political rights" ;
+    dct:identifier "section 19" ;
+    saont:orderIndex 19 ;
+    saont:hasPart sec:19_1 , sec:19_2 , sec:19_3 .
+
+sec:19_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:19 ;
+    dct:identifier "section 19(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:19_1_a , sec:19_1_b , sec:19_1_c ;
+    saont:legalText "Every citizen is free to make political choices, which includes the right to form a political party; to participate in the activities of, or recruit members for, a political party; and to campaign for a political party or cause." .
+
+sec:19_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:19_1 ;
+    dct:identifier "section 19(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to form a political party;" .
+
+sec:19_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:19_1 ;
+    dct:identifier "section 19(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "to participate in the activities of, or recruit members for, a political party; and" .
+
+sec:19_1_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:19_1 ;
+    dct:identifier "section 19(1)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "to campaign for a political party or cause." .
+
+sec:19_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:19 ;
+    dct:identifier "section 19(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "Every citizen has the right to free, fair and regular elections for any legislative body established in terms of the Constitution." .
+
+sec:19_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:19 ;
+    dct:identifier "section 19(3)" ;
+    saont:orderIndex 3 ;
+    saont:hasPart sec:19_3_a , sec:19_3_b ;
+    saont:legalText "Every adult citizen has the right to vote in elections for any legislative body established in terms of the Constitution, and to do so in secret; and to stand for public office and, if elected, to hold office." .
+
+sec:19_3_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:19_3 ;
+    dct:identifier "section 19(3)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to vote in elections for any legislative body established in terms of the Constitution, and to do so in secret; and" .
+
+sec:19_3_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:19_3 ;
+    dct:identifier "section 19(3)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "to stand for public office and, if elected, to hold office." .
+
+# SECTION 20
+
+sec:20
+    rdf:type saont:Section ;
+    dct:title "Citizenship" ;
+    dct:identifier "section 20" ;
+    saont:orderIndex 20 ;
+    saont:hasPart sec:20_1 .
+
+sec:20_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:20 ;
+    dct:identifier "section 20(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "No citizen may be deprived of citizenship." .
+
+# SECTION 21
+
+sec:21
+    rdf:type saont:Section ;
+    dct:title "Freedom of movement and residence" ;
+    dct:identifier "section 21" ;
+    saont:orderIndex 21 ;
+    saont:hasPart sec:21_1 , sec:21_2 , sec:21_3 , sec:21_4 .
+
+sec:21_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:21 ;
+    dct:identifier "section 21(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone has the right to freedom of movement." .
+
+sec:21_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:21 ;
+    dct:identifier "section 21(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "Everyone has the right to leave the Republic." .
+
+sec:21_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:21 ;
+    dct:identifier "section 21(3)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "Every citizen has the right to enter, to remain in and to reside anywhere in, the Republic." .
+
+sec:21_4
+    rdf:type saont:Provision ;
+    saont:partOf sec:21 ;
+    dct:identifier "section 21(4)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "Every citizen has the right to a passport." .
+
+# SECTION 22
+
+sec:22
+    rdf:type saont:Section ;
+    dct:title "Freedom of trade, occupation and profession" ;
+    dct:identifier "section 22" ;
+    saont:orderIndex 22 ;
+    saont:hasPart sec:22_1 .
+
+sec:22_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:22 ;
+    dct:identifier "section 22(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Every citizen has the right to choose their trade, occupation or profession freely. The practice of a trade, occupation or profession may be regulated by law." .
+
+# SECTION 23
+
+sec:23
+    rdf:type saont:Section ;
+    dct:title "Labour relations" ;
+    dct:identifier "section 23" ;
+    saont:orderIndex 23 ;
+    saont:hasPart sec:23_1 , sec:23_2 , sec:23_3 , sec:23_4 , sec:23_5 , sec:23_6 .
+
+sec:23_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:23 ;
+    dct:identifier "section 23(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone has the right to fair labour practices." .
+
+sec:23_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:23 ;
+    dct:identifier "section 23(2)" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:23_2_a , sec:23_2_b , sec:23_2_c ;
+    saont:legalText "Every worker has the right to form and join a trade union; to participate in the activities and programmes of a trade union; and to strike." .
+
+sec:23_2_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:23_2 ;
+    dct:identifier "section 23(2)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to form and join a trade union;" .
+
+sec:23_2_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:23_2 ;
+    dct:identifier "section 23(2)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "to participate in the activities and programmes of a trade union; and" .
+
+sec:23_2_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:23_2 ;
+    dct:identifier "section 23(2)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "to strike." .
+
+sec:23_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:23 ;
+    dct:identifier "section 23(3)" ;
+    saont:orderIndex 3 ;
+    saont:hasPart sec:23_3_a , sec:23_3_b ;
+    saont:legalText "Every employer has the right to form and join an employers' organisation; and to participate in the activities and programmes of an employers' organisation." .
+
+sec:23_3_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:23_3 ;
+    dct:identifier "section 23(3)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to form and join an employers' organisation; and" .
+
+sec:23_3_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:23_3 ;
+    dct:identifier "section 23(3)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "to participate in the activities and programmes of an employers' organisation." .
+
+sec:23_4
+    rdf:type saont:Provision ;
+    saont:partOf sec:23 ;
+    dct:identifier "section 23(4)" ;
+    saont:orderIndex 4 ;
+    saont:hasPart sec:23_4_a , sec:23_4_b , sec:23_4_c ;
+    saont:legalText "Every trade union and every employers' organisation has the right to determine its own administration, programmes and activities; to organise; and to form and join a federation." .
+
+sec:23_4_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:23_4 ;
+    dct:identifier "section 23(4)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to determine its own administration, programmes and activities;" .
+
+sec:23_4_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:23_4 ;
+    dct:identifier "section 23(4)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "to organise; and" .
+
+sec:23_4_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:23_4 ;
+    dct:identifier "section 23(4)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "to form and join a federation." .
+
+sec:23_5
+    rdf:type saont:Provision ;
+    saont:partOf sec:23 ;
+    dct:identifier "section 23(5)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "Every trade union, employers' organisation and employer has the right to engage in collective bargaining. National legislation may be enacted to regulate collective bargaining. To the extent that the legislation may limit a right in this Chapter, the limitation must comply with section 36(1)." ;
+    saont:references sec:36_1 .
+
+sec:23_6
+    rdf:type saont:Provision ;
+    saont:partOf sec:23 ;
+    dct:identifier "section 23(6)" ;
+    saont:orderIndex 6 ;
+    saont:legalText "National legislation may recognise union security arrangements contained in collective agreements. To the extent that the legislation may limit a right in this Chapter, the limitation must comply with section 36(1)." ;
+    saont:references sec:36_1 .
+
+# SECTION 24
+
+sec:24
+    rdf:type saont:Section ;
+    dct:title "Environment" ;
+    dct:identifier "section 24" ;
+    saont:orderIndex 24 ;
+    saont:hasPart sec:24_1 .
+
+sec:24_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:24 ;
+    dct:identifier "section 24(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:24_1_a , sec:24_1_b ;
+    saont:legalText "Everyone has the right to an environment that is not harmful to their health or well-being; and to have the environment protected, for the benefit of present and future generations, through reasonable legislative and other measures that prevent pollution and ecological degradation; promote conservation; and secure ecologically sustainable development and use of natural resources while promoting justifiable economic and social development." .
+
+sec:24_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:24_1 ;
+    dct:identifier "section 24(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to an environment that is not harmful to their health or well-being; and" .
+
+sec:24_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:24_1 ;
+    dct:identifier "section 24(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:24_1_b_i , sec:24_1_b_ii , sec:24_1_b_iii ;
+    saont:legalText "to have the environment protected, for the benefit of present and future generations, through reasonable legislative and other measures that prevent pollution and ecological degradation; promote conservation; and secure ecologically sustainable development and use of natural resources while promoting justifiable economic and social development." .
+
+sec:24_1_b_i
+    rdf:type saont:Provision ;
+    saont:partOf sec:24_1_b ;
+    dct:identifier "section 24(1)(b)(i)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "prevent pollution and ecological degradation;" .
+
+sec:24_1_b_ii
+    rdf:type saont:Provision ;
+    saont:partOf sec:24_1_b ;
+    dct:identifier "section 24(1)(b)(ii)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "promote conservation; and" .
+
+sec:24_1_b_iii
+    rdf:type saont:Provision ;
+    saont:partOf sec:24_1_b ;
+    dct:identifier "section 24(1)(b)(iii)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "secure ecologically sustainable development and use of natural resources while promoting justifiable economic and social development." .
+
+# SECTION 25
+
+sec:25
+    rdf:type saont:Section ;
+    dct:title "Property" ;
+    dct:identifier "section 25" ;
+    saont:orderIndex 25 ;
+    saont:hasPart sec:25_1 , sec:25_2 , sec:25_3 , sec:25_4 , sec:25_5 , sec:25_6 , sec:25_7 , sec:25_8 , sec:25_9 .
+
+sec:25_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:25 ;
+    dct:identifier "section 25(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "No one may be deprived of property except in terms of law of general application, and no law may permit arbitrary deprivation of property." .
+
+sec:25_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:25 ;
+    dct:identifier "section 25(2)" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:25_2_a , sec:25_2_b ;
+    saont:legalText "Property may be expropriated only in terms of law of general application for a public purpose or in the public interest; and subject to compensation, the amount of which and the time and manner of payment of which have either been agreed to by those affected or decided or approved by a court." .
+
+sec:25_2_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:25_2 ;
+    dct:identifier "section 25(2)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "for a public purpose or in the public interest; and" .
+
+sec:25_2_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:25_2 ;
+    dct:identifier "section 25(2)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "subject to compensation, the amount of which and the time and manner of payment of which have either been agreed to by those affected or decided or approved by a court." .
+
+sec:25_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:25 ;
+    dct:identifier "section 25(3)" ;
+    saont:orderIndex 3 ;
+    saont:hasPart sec:25_3_a , sec:25_3_b , sec:25_3_c , sec:25_3_d , sec:25_3_e ;
+    saont:legalText "The amount of the compensation and the time and manner of payment must be just and equitable, reflecting an equitable balance between the public interest and the interests of those affected, having regard to all relevant circumstances, including the current use of the property; the history of the acquisition and use of the property; the market value of the property; the extent of direct state investment and subsidy in the acquisition and beneficial capital improvement of the property; and the purpose of the expropriation." .
+
+sec:25_3_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:25_3 ;
+    dct:identifier "section 25(3)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "the current use of the property;" .
+
+sec:25_3_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:25_3 ;
+    dct:identifier "section 25(3)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "the history of the acquisition and use of the property;" .
+
+sec:25_3_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:25_3 ;
+    dct:identifier "section 25(3)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "the market value of the property;" .
+
+sec:25_3_d
+    rdf:type saont:Provision ;
+    saont:partOf sec:25_3 ;
+    dct:identifier "section 25(3)(d)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "the extent of direct state investment and subsidy in the acquisition and beneficial capital improvement of the property; and" .
+
+sec:25_3_e
+    rdf:type saont:Provision ;
+    saont:partOf sec:25_3 ;
+    dct:identifier "section 25(3)(e)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "the purpose of the expropriation." .
+
+sec:25_4
+    rdf:type saont:Provision ;
+    saont:partOf sec:25 ;
+    dct:identifier "section 25(4)" ;
+    saont:orderIndex 4 ;
+    saont:hasPart sec:25_4_a , sec:25_4_b ;
+    saont:legalText "For the purposes of this section the public interest includes the nation's commitment to land reform, and to reforms to bring about equitable access to all South Africa's natural resources; and property is not limited to land." .
+
+sec:25_4_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:25_4 ;
+    dct:identifier "section 25(4)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "the public interest includes the nation's commitment to land reform, and to reforms to bring about equitable access to all South Africa's natural resources; and" .
+
+sec:25_4_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:25_4 ;
+    dct:identifier "section 25(4)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "property is not limited to land." .
+
+sec:25_5
+    rdf:type saont:Provision ;
+    saont:partOf sec:25 ;
+    dct:identifier "section 25(5)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "The state must take reasonable legislative and other measures, within its available resources, to foster conditions which enable citizens to gain access to land on an equitable basis." .
+
+sec:25_6
+    rdf:type saont:Provision ;
+    saont:partOf sec:25 ;
+    dct:identifier "section 25(6)" ;
+    saont:orderIndex 6 ;
+    saont:legalText "A person or community whose tenure of land is legally insecure as a result of past racially discriminatory laws or practices is entitled, to the extent provided by an Act of Parliament, either to tenure which is legally secure or to comparable redress." .
+
+sec:25_7
+    rdf:type saont:Provision ;
+    saont:partOf sec:25 ;
+    dct:identifier "section 25(7)" ;
+    saont:orderIndex 7 ;
+    saont:legalText "A person or community dispossessed of property after 19 June 1913 as a result of past racially discriminatory laws or practices is entitled, to the extent provided by an Act of Parliament, either to restitution of that property or to equitable redress." .
+
+sec:25_8
+    rdf:type saont:Provision ;
+    saont:partOf sec:25 ;
+    dct:identifier "section 25(8)" ;
+    saont:orderIndex 8 ;
+    saont:legalText "No provision of this section may impede the state from taking legislative and other measures to achieve land, water and related reform, in order to redress the results of past racial discrimination, provided that any departure from the provisions of this section is in accordance with the provisions of section 36(1)." ;
+    saont:references sec:36_1 .
+
+sec:25_9
+    rdf:type saont:Provision ;
+    saont:partOf sec:25 ;
+    dct:identifier "section 25(9)" ;
+    saont:orderIndex 9 ;
+    saont:legalText "Parliament must enact the legislation referred to in subsection (6)." .
+
+# SECTION 26
+
+sec:26
+    rdf:type saont:Section ;
+    dct:title "Housing" ;
+    dct:identifier "section 26" ;
+    saont:orderIndex 26 ;
+    saont:hasPart sec:26_1 , sec:26_2 , sec:26_3 .
+
+sec:26_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:26 ;
+    dct:identifier "section 26(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone has the right to have access to adequate housing." .
+
+sec:26_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:26 ;
+    dct:identifier "section 26(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "The state must take reasonable legislative and other measures, within its available resources, to achieve the progressive realisation of this right." .
+
+sec:26_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:26 ;
+    dct:identifier "section 26(3)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "No one may be evicted from their home, or have their home demolished, without an order of court made after considering all the relevant circumstances. No legislation may permit arbitrary evictions." .
+
+# SECTION 27
+
+sec:27
+    rdf:type saont:Section ;
+    dct:title "Health care, food, water and social security" ;
+    dct:identifier "section 27" ;
+    saont:orderIndex 27 ;
+    saont:hasPart sec:27_1 , sec:27_2 , sec:27_3 .
+
+sec:27_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:27 ;
+    dct:identifier "section 27(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:27_1_a , sec:27_1_b , sec:27_1_c ;
+    saont:legalText "Everyone has the right to have access to health care services, including reproductive health care; sufficient food and water; and social security, including, if they are unable to support themselves and their dependants, appropriate social assistance." .
+
+sec:27_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:27_1 ;
+    dct:identifier "section 27(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "health care services, including reproductive health care;" .
+
+sec:27_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:27_1 ;
+    dct:identifier "section 27(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "sufficient food and water; and" .
+
+sec:27_1_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:27_1 ;
+    dct:identifier "section 27(1)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "social security, including, if they are unable to support themselves and their dependants, appropriate social assistance." .
+
+sec:27_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:27 ;
+    dct:identifier "section 27(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "The state must take reasonable legislative and other measures, within its available resources, to achieve the progressive realisation of each of these rights." .
+
+sec:27_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:27 ;
+    dct:identifier "section 27(3)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "No one may be refused emergency medical treatment." .
+
+# SECTION 28
+
+sec:28
+    rdf:type saont:Section ;
+    dct:title "Children" ;
+    dct:identifier "section 28" ;
+    saont:orderIndex 28 ;
+    saont:hasPart sec:28_1 , sec:28_2 , sec:28_3 .
+
+sec:28_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:28 ;
+    dct:identifier "section 28(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:28_1_a , sec:28_1_b , sec:28_1_c , sec:28_1_d , sec:28_1_e , sec:28_1_f , sec:28_1_g , sec:28_1_h , sec:28_1_i ;
+    saont:legalText "Every child has the right to a name and a nationality from birth; to family care or parental care, or to appropriate alternative care when removed from the family environment; to basic nutrition, shelter, basic health care services and social services; to be protected from maltreatment, neglect, abuse or degradation; to be protected from exploitative labour practices; not to be required or permitted to perform work or provide services that are inappropriate for a person of that child's age or place at risk the child's well-being, education, physical or mental health or spiritual, moral or social development; not to be detained except as a measure of last resort, in which case, in addition to the rights a child enjoys under sections 12 and 35, the child may be detained only for the shortest appropriate period of time, and has the right to be kept separately from detained persons over the age of 18 years and treated in a manner, and kept in conditions, that take account of the child's age; to have a legal practitioner assigned to the child by the state, and at state expense, in civil proceedings affecting the child, if substantial injustice would otherwise result; and not to be used directly in armed conflict, and to be protected in times of armed conflict." ;
+    saont:references sec:12 , sec:35 .
+
+sec:28_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1 ;
+    dct:identifier "section 28(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to a name and a nationality from birth;" .
+
+sec:28_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1 ;
+    dct:identifier "section 28(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "to family care or parental care, or to appropriate alternative care when removed from the family environment;" .
+
+sec:28_1_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1 ;
+    dct:identifier "section 28(1)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "to basic nutrition, shelter, basic health care services and social services;" .
+
+sec:28_1_d
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1 ;
+    dct:identifier "section 28(1)(d)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "to be protected from maltreatment, neglect, abuse or degradation;" .
+
+sec:28_1_e
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1 ;
+    dct:identifier "section 28(1)(e)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "to be protected from exploitative labour practices;" .
+
+sec:28_1_f
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1 ;
+    dct:identifier "section 28(1)(f)" ;
+    saont:orderIndex 6 ;
+    saont:hasPart sec:28_1_f_i , sec:28_1_f_ii ;
+    saont:legalText "not to be required or permitted to perform work or provide services that are inappropriate for a person of that child's age; or place at risk the child's well-being, education, physical or mental health or spiritual, moral or social development;" .
+
+sec:28_1_f_i
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1_f ;
+    dct:identifier "section 28(1)(f)(i)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "are inappropriate for a person of that child's age; or" .
+
+sec:28_1_f_ii
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1_f ;
+    dct:identifier "section 28(1)(f)(ii)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "place at risk the child's well-being, education, physical or mental health or spiritual, moral or social development;" .
+
+sec:28_1_g
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1 ;
+    dct:identifier "section 28(1)(g)" ;
+    saont:orderIndex 7 ;
+    saont:hasPart sec:28_1_g_i , sec:28_1_g_ii ;
+    saont:legalText "not to be detained except as a measure of last resort, in which case, in addition to the rights a child enjoys under sections 12 and 35, the child may be detained only for the shortest appropriate period of time, and has the right to be kept separately from detained persons over the age of 18 years; and treated in a manner, and kept in conditions, that take account of the child's age;" ;
+    saont:references sec:12 , sec:35 .
+
+sec:28_1_g_i
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1_g ;
+    dct:identifier "section 28(1)(g)(i)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "kept separately from detained persons over the age of 18 years; and" .
+
+sec:28_1_g_ii
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1_g ;
+    dct:identifier "section 28(1)(g)(ii)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "treated in a manner, and kept in conditions, that take account of the child's age;" .
+
+sec:28_1_h
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1 ;
+    dct:identifier "section 28(1)(h)" ;
+    saont:orderIndex 8 ;
+    saont:legalText "to have a legal practitioner assigned to the child by the state, and at state expense, in civil proceedings affecting the child, if substantial injustice would otherwise result; and" .
+
+sec:28_1_i
+    rdf:type saont:Provision ;
+    saont:partOf sec:28_1 ;
+    dct:identifier "section 28(1)(i)" ;
+    saont:orderIndex 9 ;
+    saont:legalText "not to be used directly in armed conflict, and to be protected in times of armed conflict." .
+
+sec:28_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:28 ;
+    dct:identifier "section 28(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "A child's best interests are of paramount importance in every matter concerning the child." .
+
+sec:28_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:28 ;
+    dct:identifier "section 28(3)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "In this section 'child' means a person under the age of 18 years." .
+
+# SECTION 29
+
+sec:29
+    rdf:type saont:Section ;
+    dct:title "Education" ;
+    dct:identifier "section 29" ;
+    saont:orderIndex 29 ;
+    saont:hasPart sec:29_1 , sec:29_2 , sec:29_3 , sec:29_4 .
+
+sec:29_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:29 ;
+    dct:identifier "section 29(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:29_1_a , sec:29_1_b ;
+    saont:legalText "Everyone has the right to a basic education, including adult basic education; and to further education, which the state, through reasonable measures, must make progressively available and accessible." .
+
+sec:29_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:29_1 ;
+    dct:identifier "section 29(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to a basic education, including adult basic education; and" .
+
+sec:29_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:29_1 ;
+    dct:identifier "section 29(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "to further education, which the state, through reasonable measures, must make progressively available and accessible." .
+
+sec:29_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:29 ;
+    dct:identifier "section 29(2)" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:29_2_a , sec:29_2_b , sec:29_2_c ;
+    saont:legalText "Everyone has the right to receive education in the official language or languages of their choice in public educational institutions where that education is reasonably practicable. In order to ensure the effective access to, and implementation of, this right, the state must consider all reasonable educational alternatives, including single medium institutions, taking into account equity; practicability; and the need to redress the results of past racially discriminatory laws and practices." .
+
+sec:29_2_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:29_2 ;
+    dct:identifier "section 29(2)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "equity;" .
+
+sec:29_2_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:29_2 ;
+    dct:identifier "section 29(2)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "practicability; and" .
+
+sec:29_2_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:29_2 ;
+    dct:identifier "section 29(2)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "the need to redress the results of past racially discriminatory laws and practices." .
+
+sec:29_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:29 ;
+    dct:identifier "section 29(3)" ;
+    saont:orderIndex 3 ;
+    saont:hasPart sec:29_3_a , sec:29_3_b , sec:29_3_c ;
+    saont:legalText "Everyone has the right to establish and maintain, at their own expense, independent educational institutions that do not discriminate on the basis of race; are registered with the state; and maintain standards that are not inferior to standards at comparable public educational institutions." .
+
+sec:29_3_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:29_3 ;
+    dct:identifier "section 29(3)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "do not discriminate on the basis of race;" .
+
+sec:29_3_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:29_3 ;
+    dct:identifier "section 29(3)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "are registered with the state; and" .
+
+sec:29_3_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:29_3 ;
+    dct:identifier "section 29(3)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "maintain standards that are not inferior to standards at comparable public educational institutions." .
+
+sec:29_4
+    rdf:type saont:Provision ;
+    saont:partOf sec:29 ;
+    dct:identifier "section 29(4)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "Subsection (3) does not preclude state subsidies for independent educational institutions." .
+
+# SECTION 30
+
+sec:30
+    rdf:type saont:Section ;
+    dct:title "Language and culture" ;
+    dct:identifier "section 30" ;
+    saont:orderIndex 30 ;
+    saont:hasPart sec:30_1 .
+
+sec:30_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:30 ;
+    dct:identifier "section 30(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone has the right to use the language and to participate in the cultural life of their choice, but no one exercising these rights may do so in a manner inconsistent with any provision of the Bill of Rights." .
+
+# SECTION 31
+
+sec:31
+    rdf:type saont:Section ;
+    dct:title "Cultural, religious and linguistic communities" ;
+    dct:identifier "section 31" ;
+    saont:orderIndex 31 ;
+    saont:hasPart sec:31_1 , sec:31_2 .
+
+sec:31_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:31 ;
+    dct:identifier "section 31(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:31_1_a , sec:31_1_b ;
+    saont:legalText "Persons belonging to a cultural, religious or linguistic community may not be denied the right, with other members of that community to enjoy their culture, practise their religion and use their language; and to form, join and maintain cultural, religious and linguistic associations and other organs of civil society." .
+
+sec:31_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:31_1 ;
+    dct:identifier "section 31(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to enjoy their culture, practise their religion and use their language; and" .
+
+sec:31_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:31_1 ;
+    dct:identifier "section 31(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "to form, join and maintain cultural, religious and linguistic associations and other organs of civil society." .
+
+sec:31_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:31 ;
+    dct:identifier "section 31(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "The rights in subsection (1) may not be exercised in a manner inconsistent with any provision of the Bill of Rights." .
+
+# SECTION 32
+
+sec:32
+    rdf:type saont:Section ;
+    dct:title "Access to information" ;
+    dct:identifier "section 32" ;
+    saont:orderIndex 32 ;
+    saont:hasPart sec:32_1 , sec:32_2 .
+
+sec:32_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:32 ;
+    dct:identifier "section 32(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:32_1_a , sec:32_1_b ;
+    saont:legalText "Everyone has the right of access to any information held by the state; and any information that is held by another person and that is required for the exercise or protection of any rights." .
+
+sec:32_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:32_1 ;
+    dct:identifier "section 32(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "any information held by the state; and" .
+
+sec:32_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:32_1 ;
+    dct:identifier "section 32(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "any information that is held by another person and that is required for the exercise or protection of any rights." .
+
+sec:32_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:32 ;
+    dct:identifier "section 32(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "National legislation must be enacted to give effect to this right, and may provide for reasonable measures to alleviate the administrative and financial burden on the state." .
+
+# SECTION 33
+
+sec:33
+    rdf:type saont:Section ;
+    dct:title "Just administrative action" ;
+    dct:identifier "section 33" ;
+    saont:orderIndex 33 ;
+    saont:hasPart sec:33_1 , sec:33_2 , sec:33_3 .
+
+sec:33_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:33 ;
+    dct:identifier "section 33(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone has the right to administrative action that is lawful, reasonable and procedurally fair." .
+
+sec:33_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:33 ;
+    dct:identifier "section 33(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "Everyone whose rights have been adversely affected by administrative action has the right to be given written reasons." .
+
+sec:33_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:33 ;
+    dct:identifier "section 33(3)" ;
+    saont:orderIndex 3 ;
+    saont:hasPart sec:33_3_a , sec:33_3_b , sec:33_3_c ;
+    saont:legalText "National legislation must be enacted to give effect to these rights, and must provide for the review of administrative action by a court or, where appropriate, an independent and impartial tribunal; impose a duty on the state to give effect to the rights in subsections (1) and (2); and promote an efficient administration." .
+
+sec:33_3_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:33_3 ;
+    dct:identifier "section 33(3)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "provide for the review of administrative action by a court or, where appropriate, an independent and impartial tribunal;" .
+
+sec:33_3_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:33_3 ;
+    dct:identifier "section 33(3)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "impose a duty on the state to give effect to the rights in subsections (1) and (2); and" .
+
+sec:33_3_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:33_3 ;
+    dct:identifier "section 33(3)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "promote an efficient administration." .
+
+# SECTION 34
+
+sec:34
+    rdf:type saont:Section ;
+    dct:title "Access to courts" ;
+    dct:identifier "section 34" ;
+    saont:orderIndex 34 ;
+    saont:hasPart sec:34_1 .
+
+sec:34_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:34 ;
+    dct:identifier "section 34(1)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "Everyone has the right to have any dispute that can be resolved by the application of law decided in a fair public hearing before a court or, where appropriate, another independent and impartial tribunal or forum." .
+
+# SECTION 35
+
+sec:35
+    rdf:type saont:Section ;
+    dct:title "Arrested, detained and accused persons" ;
+    dct:identifier "section 35" ;
+    saont:orderIndex 35 ;
+    saont:hasPart sec:35_1 , sec:35_2 , sec:35_3 , sec:35_4 , sec:35_5 .
+
+sec:35_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:35 ;
+    dct:identifier "section 35(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:35_1_a , sec:35_1_b , sec:35_1_c , sec:35_1_d , sec:35_1_e , sec:35_1_f ;
+    saont:legalText "Everyone who is arrested for allegedly committing an offence has the right to remain silent; to be informed promptly of the right to remain silent and of the consequences of not remaining silent; not to be compelled to make any confession or admission that could be used in evidence against that person; to be brought before a court as soon as reasonably possible, but not later than 48 hours after the arrest or the end of the first court day after the expiry of the 48 hours, if the 48 hours expire outside ordinary court hours or on a day which is not an ordinary court day; at the first court appearance after being arrested, to be charged or to be informed of the reason for the detention to continue, or to be released; and to be released from detention if the interests of justice permit, subject to reasonable conditions." .
+
+sec:35_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_1 ;
+    dct:identifier "section 35(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to remain silent;" .
+
+sec:35_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_1 ;
+    dct:identifier "section 35(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:35_1_b_i , sec:35_1_b_ii ;
+    saont:legalText "to be informed promptly of the right to remain silent; and of the consequences of not remaining silent;" .
+
+sec:35_1_b_i
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_1_b ;
+    dct:identifier "section 35(1)(b)(i)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "of the right to remain silent; and" .
+
+sec:35_1_b_ii
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_1_b ;
+    dct:identifier "section 35(1)(b)(ii)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "of the consequences of not remaining silent;" .
+
+sec:35_1_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_1 ;
+    dct:identifier "section 35(1)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "not to be compelled to make any confession or admission that could be used in evidence against that person;" .
+
+sec:35_1_d
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_1 ;
+    dct:identifier "section 35(1)(d)" ;
+    saont:orderIndex 4 ;
+    saont:hasPart sec:35_1_d_i , sec:35_1_d_ii ;
+    saont:legalText "to be brought before a court as soon as reasonably possible, but not later than 48 hours after the arrest; or the end of the first court day after the expiry of the 48 hours, if the 48 hours expire outside ordinary court hours or on a day which is not an ordinary court day;" .
+
+sec:35_1_d_i
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_1_d ;
+    dct:identifier "section 35(1)(d)(i)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "48 hours after the arrest; or" .
+
+sec:35_1_d_ii
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_1_d ;
+    dct:identifier "section 35(1)(d)(ii)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "the end of the first court day after the expiry of the 48 hours, if the 48 hours expire outside ordinary court hours or on a day which is not an ordinary court day;" .
+
+sec:35_1_e
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_1 ;
+    dct:identifier "section 35(1)(e)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "at the first court appearance after being arrested, to be charged or to be informed of the reason for the detention to continue, or to be released; and" .
+
+sec:35_1_f
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_1 ;
+    dct:identifier "section 35(1)(f)" ;
+    saont:orderIndex 6 ;
+    saont:legalText "to be released from detention if the interests of justice permit, subject to reasonable conditions." .
+
+sec:35_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:35 ;
+    dct:identifier "section 35(2)" ;
+    saont:orderIndex 2 ;
+    saont:hasPart sec:35_2_a , sec:35_2_b , sec:35_2_c , sec:35_2_d , sec:35_2_e , sec:35_2_f ;
+    saont:legalText "Everyone who is detained, including every sentenced prisoner, has the right to be informed promptly of the reason for being detained; to choose, and to consult with, a legal practitioner, and to be informed of this right promptly; to have a legal practitioner assigned to the detained person by the state and at state expense, if substantial injustice would otherwise result, and to be informed of this right promptly; to challenge the lawfulness of the detention in person before a court and, if the detention is unlawful, to be released; to conditions of detention that are consistent with human dignity, including at least exercise and the provision, at state expense, of adequate accommodation, nutrition, reading material and medical treatment; and to communicate with, and be visited by, that person's spouse or partner; next of kin; chosen religious counsellor; and chosen medical practitioner." .
+
+sec:35_2_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_2 ;
+    dct:identifier "section 35(2)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to be informed promptly of the reason for being detained;" .
+
+sec:35_2_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_2 ;
+    dct:identifier "section 35(2)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "to choose, and to consult with, a legal practitioner, and to be informed of this right promptly;" .
+
+sec:35_2_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_2 ;
+    dct:identifier "section 35(2)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "to have a legal practitioner assigned to the detained person by the state and at state expense, if substantial injustice would otherwise result, and to be informed of this right promptly;" .
+
+sec:35_2_d
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_2 ;
+    dct:identifier "section 35(2)(d)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "to challenge the lawfulness of the detention in person before a court and, if the detention is unlawful, to be released;" .
+
+sec:35_2_e
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_2 ;
+    dct:identifier "section 35(2)(e)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "to conditions of detention that are consistent with human dignity, including at least exercise and the provision, at state expense, of adequate accommodation, nutrition, reading material and medical treatment; and" .
+
+sec:35_2_f
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_2 ;
+    dct:identifier "section 35(2)(f)" ;
+    saont:orderIndex 6 ;
+    saont:hasPart sec:35_2_f_i , sec:35_2_f_ii , sec:35_2_f_iii , sec:35_2_f_iv ;
+    saont:legalText "to communicate with, and be visited by, that person's spouse or partner; next of kin; chosen religious counsellor; and chosen medical practitioner." .
+
+sec:35_2_f_i
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_2_f ;
+    dct:identifier "section 35(2)(f)(i)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "spouse or partner;" .
+
+sec:35_2_f_ii
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_2_f ;
+    dct:identifier "section 35(2)(f)(ii)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "next of kin;" .
+
+sec:35_2_f_iii
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_2_f ;
+    dct:identifier "section 35(2)(f)(iii)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "chosen religious counsellor; and" .
+
+sec:35_2_f_iv
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_2_f ;
+    dct:identifier "section 35(2)(f)(iv)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "chosen medical practitioner." .
+
+sec:35_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:35 ;
+    dct:identifier "section 35(3)" ;
+    saont:orderIndex 3 ;
+    saont:hasPart sec:35_3_a , sec:35_3_b , sec:35_3_c , sec:35_3_d , sec:35_3_e , sec:35_3_f , sec:35_3_g , sec:35_3_h , sec:35_3_i , sec:35_3_j , sec:35_3_k , sec:35_3_l , sec:35_3_m , sec:35_3_n , sec:35_3_o ;
+    saont:legalText "Every accused person has a right to a fair trial, which includes the right to be informed of the charge with sufficient detail to answer it; to have adequate time and facilities to prepare a defence; to a public trial before an ordinary court; to have their trial begin and conclude without unreasonable delay; to be present when being tried; to choose, and be represented by, a legal practitioner, and to be informed of this right promptly; to have a legal practitioner assigned to the accused person by the state and at state expense, if substantial injustice would otherwise result, and to be informed of this right promptly; to be presumed innocent, to remain silent, and not to testify during the proceedings; to adduce and challenge evidence; not to be compelled to give self-incriminating evidence; to be tried in a language that the accused person understands or, if that is not practicable, to have the proceedings interpreted in that language; not to be convicted for an act or omission that was not an offence under either national or international law at the time it was committed or omitted; not to be tried for an offence in respect of an act or omission for which that person has previously been either acquitted or convicted; to the benefit of the least severe of the prescribed punishments if the prescribed punishment for the offence has been changed between the time that the offence was committed and the time of sentencing; and of appeal to, or review by, a higher court." .
+
+sec:35_3_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "to be informed of the charge with sufficient detail to answer it;" .
+
+sec:35_3_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "to have adequate time and facilities to prepare a defence;" .
+
+sec:35_3_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "to a public trial before an ordinary court;" .
+
+sec:35_3_d
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(d)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "to have their trial begin and conclude without unreasonable delay;" .
+
+sec:35_3_e
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(e)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "to be present when being tried;" .
+
+sec:35_3_f
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(f)" ;
+    saont:orderIndex 6 ;
+    saont:legalText "to choose, and be represented by, a legal practitioner, and to be informed of this right promptly;" .
+
+sec:35_3_g
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(g)" ;
+    saont:orderIndex 7 ;
+    saont:legalText "to have a legal practitioner assigned to the accused person by the state and at state expense, if substantial injustice would otherwise result, and to be informed of this right promptly;" .
+
+sec:35_3_h
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(h)" ;
+    saont:orderIndex 8 ;
+    saont:legalText "to be presumed innocent, to remain silent, and not to testify during the proceedings;" .
+
+sec:35_3_i
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(i)" ;
+    saont:orderIndex 9 ;
+    saont:legalText "to adduce and challenge evidence;" .
+
+sec:35_3_j
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(j)" ;
+    saont:orderIndex 10 ;
+    saont:legalText "not to be compelled to give self-incriminating evidence;" .
+
+sec:35_3_k
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(k)" ;
+    saont:orderIndex 11 ;
+    saont:legalText "to be tried in a language that the accused person understands or, if that is not practicable, to have the proceedings interpreted in that language;" .
+
+sec:35_3_l
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(l)" ;
+    saont:orderIndex 12 ;
+    saont:legalText "not to be convicted for an act or omission that was not an offence under either national or international law at the time it was committed or omitted;" .
+
+sec:35_3_m
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(m)" ;
+    saont:orderIndex 13 ;
+    saont:legalText "not to be tried for an offence in respect of an act or omission for which that person has previously been either acquitted or convicted;" .
+
+sec:35_3_n
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(n)" ;
+    saont:orderIndex 14 ;
+    saont:legalText "to the benefit of the least severe of the prescribed punishments if the prescribed punishment for the offence has been changed between the time that the offence was committed and the time of sentencing; and" .
+
+sec:35_3_o
+    rdf:type saont:Provision ;
+    saont:partOf sec:35_3 ;
+    dct:identifier "section 35(3)(o)" ;
+    saont:orderIndex 15 ;
+    saont:legalText "of appeal to, or review by, a higher court." .
+
+sec:35_4
+    rdf:type saont:Provision ;
+    saont:partOf sec:35 ;
+    dct:identifier "section 35(4)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "Whenever this section requires information to be given to a person, that information must be given in a language that the person understands." .
+
+sec:35_5
+    rdf:type saont:Provision ;
+    saont:partOf sec:35 ;
+    dct:identifier "section 35(5)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "Evidence obtained in a manner that violates any right in the Bill of Rights must be excluded if the admission of that evidence would render the trial unfair or otherwise be detrimental to the administration of justice." .
+
+# SECTION 36
+
+sec:36
+    rdf:type saont:Section ;
+    dct:title "Limitation of Rights" ;
+    dct:identifier "section 36" ;
+    saont:orderIndex 36 ;
+    saont:hasPart sec:36_1 , sec:36_2 .
+
+sec:36_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:36 ;
+    dct:identifier "section 36(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:36_1_a , sec:36_1_b , sec:36_1_c , sec:36_1_d , sec:36_1_e ;
+    saont:legalText "The rights in the Bill of Rights may be limited only in terms of law of general application to the extent that the limitation is reasonable and justifiable in an open and democratic society based on human dignity, equality and freedom, taking into account all relevant factors, including the nature of the right; the importance of the purpose of the limitation; the nature and extent of the limitation; the relation between the limitation and its purpose; and less restrictive means to achieve the purpose." .
+
+sec:36_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:36_1 ;
+    dct:identifier "section 36(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "the nature of the right;" .
+
+sec:36_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:36_1 ;
+    dct:identifier "section 36(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "the importance of the purpose of the limitation;" .
+
+sec:36_1_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:36_1 ;
+    dct:identifier "section 36(1)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "the nature and extent of the limitation;" .
+
+sec:36_1_d
+    rdf:type saont:Provision ;
+    saont:partOf sec:36_1 ;
+    dct:identifier "section 36(1)(d)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "the relation between the limitation and its purpose; and" .
+
+sec:36_1_e
+    rdf:type saont:Provision ;
+    saont:partOf sec:36_1 ;
+    dct:identifier "section 36(1)(e)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "less restrictive means to achieve the purpose." .
+
+sec:36_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:36 ;
+    dct:identifier "section 36(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "Except as provided in subsection (1) or in any other provision of the Constitution, no law may limit any right entrenched in the Bill of Rights." .
+
+# SECTION 37 (already correctly split – keeping as is but adding orderIndex and identifiers where missing – but we already included section 37 above. To avoid duplication, I will keep the earlier sec:37 from the user's file? Actually the user's file already had a well‑formed sec:37. I will keep that unchanged because it already follows the improved pattern. I will only add missing `dct:identifier` and `orderIndex` if any. Let me check: In the user's file, sec:37 and its parts already have orderIndex and dct:identifier. So I keep them.
+
+# However, the user's file included sec:37 after sec:36, so I will retain that exactly as provided. But note: the user's file had a small inconsistency: sec:37_2_a and sec:37_2_b have orderIndex but the parent sec:37_2 had legalText that repeated the whole text. That's fine.
+
+# I will now add SECTION 38 and SECTION 39 as previously given (they are already in the user's file at the end, but they are not split. I will split them now for consistency.
+
+# SECTION 38 (split)
+
+sec:38
+    rdf:type saont:Section ;
+    dct:title "Enforcement of rights" ;
+    dct:identifier "section 38" ;
+    saont:orderIndex 38 ;
+    saont:hasPart sec:38_1 .
+
+sec:38_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:38 ;
+    dct:identifier "section 38(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:38_1_a , sec:38_1_b , sec:38_1_c , sec:38_1_d , sec:38_1_e ;
+    saont:legalText "Anyone listed in this section has the right to approach a competent court, alleging that a right in the Bill of Rights has been infringed or threatened, and the court may grant appropriate relief, including a declaration of rights. The persons who may approach a court are anyone acting in their own interest; anyone acting on behalf of another person who cannot act in their own name; anyone acting as a member of, or in the interest of, a group or class of persons; anyone acting in the public interest; and an association acting in the interest of its members." .
+
+sec:38_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:38_1 ;
+    dct:identifier "section 38(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "anyone acting in their own interest;" .
+
+sec:38_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:38_1 ;
+    dct:identifier "section 38(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "anyone acting on behalf of another person who cannot act in their own name;" .
+
+sec:38_1_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:38_1 ;
+    dct:identifier "section 38(1)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "anyone acting as a member of, or in the interest of, a group or class of persons;" .
+
+sec:38_1_d
+    rdf:type saont:Provision ;
+    saont:partOf sec:38_1 ;
+    dct:identifier "section 38(1)(d)" ;
+    saont:orderIndex 4 ;
+    saont:legalText "anyone acting in the public interest; and" .
+
+sec:38_1_e
+    rdf:type saont:Provision ;
+    saont:partOf sec:38_1 ;
+    dct:identifier "section 38(1)(e)" ;
+    saont:orderIndex 5 ;
+    saont:legalText "an association acting in the interest of its members." .
+
+# SECTION 39 (split)
+
+sec:39
+    rdf:type saont:Section ;
+    dct:title "Interpretation of Bill of Rights" ;
+    dct:identifier "section 39" ;
+    saont:orderIndex 39 ;
+    saont:hasPart sec:39_1 , sec:39_2 , sec:39_3 .
+
+sec:39_1
+    rdf:type saont:Provision ;
+    saont:partOf sec:39 ;
+    dct:identifier "section 39(1)" ;
+    saont:orderIndex 1 ;
+    saont:hasPart sec:39_1_a , sec:39_1_b , sec:39_1_c ;
+    saont:legalText "When interpreting the Bill of Rights, a court, tribunal or forum must promote the values that underlie an open and democratic society based on human dignity, equality and freedom; must consider international law; and may consider foreign law." .
+
+sec:39_1_a
+    rdf:type saont:Provision ;
+    saont:partOf sec:39_1 ;
+    dct:identifier "section 39(1)(a)" ;
+    saont:orderIndex 1 ;
+    saont:legalText "must promote the values that underlie an open and democratic society based on human dignity, equality and freedom;" .
+
+sec:39_1_b
+    rdf:type saont:Provision ;
+    saont:partOf sec:39_1 ;
+    dct:identifier "section 39(1)(b)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "must consider international law; and" .
+
+sec:39_1_c
+    rdf:type saont:Provision ;
+    saont:partOf sec:39_1 ;
+    dct:identifier "section 39(1)(c)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "may consider foreign law." .
+
+sec:39_2
+    rdf:type saont:Provision ;
+    saont:partOf sec:39 ;
+    dct:identifier "section 39(2)" ;
+    saont:orderIndex 2 ;
+    saont:legalText "When interpreting any legislation, and when developing the common law or customary law, every court, tribunal or forum must promote the spirit, purport and objects of the Bill of Rights." .
+
+sec:39_3
+    rdf:type saont:Provision ;
+    saont:partOf sec:39 ;
+    dct:identifier "section 39(3)" ;
+    saont:orderIndex 3 ;
+    saont:legalText "The Bill of Rights does not deny the existence of any other rights or freedoms that are recognised or conferred by common law, customary law or legislation, to the extent that they are consistent with the Bill." .
