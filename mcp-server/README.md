@@ -62,7 +62,7 @@ httpx – Async HTTP client
 python-dotenv – Environment config
 
 📜 License
-Public domain / open data.
+Public domain / open data
 
 Maintainer: Beki Ndlovu
 Issues: https://github.com/od2og/constitutionat30/issues

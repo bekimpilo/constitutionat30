@@ -50,4 +50,5 @@ Chapter 2: https://www.gov.za/documents/constitution/chapter-2-bill-rights
 
 Maintainer: Beki Ndlovu
 Issues: https://github.com/od2og/constitutionat30/issues
+
 @2026

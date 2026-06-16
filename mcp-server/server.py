@@ -21,7 +21,6 @@ SPARQL_ENDPOINT = os.getenv("SPARQL_ENDPOINT")
 if not SPARQL_ENDPOINT:
     raise RuntimeError("SPARQL_ENDPOINT environment variable is not set. Set it in the environment or a .env file.")
 
-
 @mcp.tool()
 async def query_constitution(sparql_query: str) -> str:
     """
