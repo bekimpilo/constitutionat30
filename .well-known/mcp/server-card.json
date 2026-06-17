@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.smithery.ai/mcp/server-card/0.0.1/schema.json",
+  "name": "South African Constitution Server",
+  "description": "MCP server for querying the South African Constitution (Chapters 1 & 2) via SPARQL. Enables constitutional research, FRIA, and GraphRAG applications.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Od2og",
+    "url": "https://github.com/yourusername/za-constitution-kg"
+  },
+  "homepage": "https://github.com/yourusername/za-constitution-kg",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/za-constitution-kg"
+  },
+  "license": "MIT",
+  "transport": {
+    "type": "streamable-http",
+    "url": "https://your-deployed-server-url.com/mcp"
+  },
+  "capabilities": {
+    "tools": [
+      {
+        "name": "query_constitution",
+        "description": "Execute a SPARQL query against the South African Constitution knowledge graph."
+      },
+      {
+        "name": "get_section_text",
+        "description": "Retrieve the full legal text of a specific section or provision by its identifier."
+      },
+      {
+        "name": "find_sections_by_keyword",
+        "description": "Search for sections or provisions that contain a specific keyword in their legal text."
+      }
+    ]
+  },
+  "configuration": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "sparqlEndpoint": {
+          "type": "string",
+          "description": "SPARQL endpoint URL (defaults to TriplyDB public endpoint)"
+        }
+      }
+    }
+  }
+}
