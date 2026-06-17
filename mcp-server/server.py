@@ -4,14 +4,25 @@ Deployed on Railway with FastAPI wrapper, health check, and server card.
 """
 
 import os
+import re
 import json
+import logging
 import httpx
 from dotenv import load_dotenv
 from fastapi import FastAPI, Response
+from fastapi.responses import JSONResponse
 from mcp.server.fastmcp import FastMCP
 
 # Load environment variables from .env
 load_dotenv()
+
+# Configure logging. LOG_LEVEL can be overridden via env (e.g. "DEBUG" while
+# diagnosing an issue, "INFO"/"WARNING" in normal production use).
+logging.basicConfig(
+    level=os.getenv("LOG_LEVEL", "INFO").upper(),
+    format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
+)
+logger = logging.getLogger("sa_constitution_server")
 
 # Initialize the MCP server
 mcp = FastMCP("South African Constitution Server")
@@ -22,7 +33,28 @@ SPARQL_ENDPOINT = os.getenv(
     "https://api.triplydb.com/datasets/Od2og/za-constitution/sparql"
 )
 
-print(f"🔗 Using SPARQL endpoint: {SPARQL_ENDPOINT}")
+# Public base URL of this server, used in the server card / root endpoint.
+# This is your custom domain (not Railway's auto-generated *.up.railway.app
+# address). Required — no hardcoded fallback, since baking a specific
+# domain into source code is what we're trying to avoid here.
+PUBLIC_BASE_URL = os.getenv("PUBLIC_BASE_URL")
+if not PUBLIC_BASE_URL:
+    raise RuntimeError(
+        "PUBLIC_BASE_URL environment variable must be set "
+        "(e.g. 'https://mcp.od2og.africa') so the server card and root "
+        "endpoint can advertise the correct public address."
+    )
+PUBLIC_BASE_URL = PUBLIC_BASE_URL.rstrip("/")
+
+logger.info("Using SPARQL endpoint: %s", SPARQL_ENDPOINT)
+
+# Valid prefixed-name pattern for section identifiers, e.g. "sec:21", "sec:23_2_a"
+SECTION_ID_PATTERN = re.compile(r"^[A-Za-z_][\w]*:[\w]+$")
+
+
+def _escape_sparql_string_literal(value: str) -> str:
+    """Escape a value for safe inclusion inside a double-quoted SPARQL string literal."""
+    return value.replace("\\", "\\\\").replace('"', '\\"')
 
 
 # ============================================
@@ -54,9 +86,11 @@ async def query_constitution(sparql_query: str) -> str:
             response.raise_for_status()
             return response.text
         except httpx.HTTPStatusError as e:
-            return f"HTTP error: {e.response.status_code} - {e.response.text}"
-        except Exception as e:
-            return f"Error executing query: {str(e)}"
+            logger.warning("query_constitution HTTP error %s: %s", e.response.status_code, e.response.text)
+            return f"HTTP error: {e.response.status_code}"
+        except Exception:
+            logger.exception("query_constitution failed for query: %s", sparql_query)
+            return "Error executing query."
 
 
 @mcp.tool()
@@ -65,17 +99,28 @@ async def get_section_text(section_id: str) -> str:
     Retrieve the full legal text of a specific section or provision by its identifier.
 
     Args:
-        section_id: The section identifier (e.g., "sec:21", "sec:23_2_a", "sec:36_1").
+        section_id: The section identifier as a SPARQL prefixed name
+            (e.g., "sec:21", "sec:23_2_a", "sec:36_1").
 
     Returns:
         The legal text of the specified provision.
     """
+    if not SECTION_ID_PATTERN.match(section_id):
+        return (
+            "Invalid section_id format. Expected a prefixed name like 'sec:21' "
+            "or 'sec:23_2_a'."
+        )
+
+    # NOTE: section_id is a SPARQL prefixed name (e.g. "sec:21"), so it must be
+    # used as-is, NOT wrapped in angle brackets. Angle brackets denote a full
+    # IRI in SPARQL, which would bypass the PREFIX declaration entirely and
+    # never match anything in the graph.
     query = f"""
     PREFIX saont: <https://od2og.africa/ontology/>
     PREFIX sec: <https://od2og.africa/constitution/section/>
 
     SELECT ?text WHERE {{
-        <{section_id}> saont:legalText ?text .
+        {section_id} saont:legalText ?text .
     }}
     LIMIT 1
     """
@@ -95,8 +140,9 @@ async def get_section_text(section_id: str) -> str:
             if bindings:
                 return bindings[0].get("text", {}).get("value", "No text found.")
             return "No text found for that identifier."
-        except Exception as e:
-            return f"Error: {str(e)}"
+        except Exception:
+            logger.exception("get_section_text failed for section_id: %s", section_id)
+            return "Error retrieving section text."
 
 
 @mcp.tool()
@@ -110,13 +156,14 @@ async def find_sections_by_keyword(keyword: str) -> str:
     Returns:
         A list of matching provision identifiers and their legal texts.
     """
+    safe_keyword = _escape_sparql_string_literal(keyword)
     query = f"""
     PREFIX saont: <https://od2og.africa/ontology/>
     PREFIX sec: <https://od2og.africa/constitution/section/>
 
     SELECT ?provision ?text WHERE {{
         ?provision saont:legalText ?text .
-        FILTER(REGEX(LCASE(?text), LCASE("{keyword}"), "i"))
+        FILTER(REGEX(LCASE(?text), LCASE("{safe_keyword}"), "i"))
     }}
     LIMIT 20
     """
@@ -144,8 +191,9 @@ async def find_sections_by_keyword(keyword: str) -> str:
                     text = text[:200] + "..."
                 results.append(f"{provision}: {text}")
             return "\n\n".join(results)
-        except Exception as e:
-            return f"Error: {str(e)}"
+        except Exception:
+            logger.exception("find_sections_by_keyword failed for keyword: %s", keyword)
+            return "Error executing keyword search."
 
 
 # ============================================
@@ -163,8 +211,6 @@ app.mount("/mcp", mcp.streamable_http_app())
 @app.get("/.well-known/mcp")
 async def serve_server_card():
     """Serve the MCP server card for discovery (exact template format)."""
-    railway_url = "https://mcp.od2og.africa/"
-
     card = {
         "serverInfo": {
             "name": "South African Constitution Server",
@@ -228,27 +274,48 @@ async def serve_server_card():
 # ----- Health Check (/health) -----
 @app.get("/health")
 async def health_check():
-    """Health check endpoint for Railway and Smithery monitoring."""
-    return {
-        "status": "healthy",
+    """Health check endpoint for Railway and Smithery monitoring.
+
+    Actually pings the SPARQL endpoint with a cheap ASK query so that a
+    backend outage is reflected here, rather than always reporting healthy.
+    """
+    sparql_ok = False
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            response = await client.post(
+                SPARQL_ENDPOINT,
+                data={"query": "ASK { ?s ?p ?o }"},
+                headers={
+                    "Accept": "application/json",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            )
+            sparql_ok = response.status_code == 200
+    except Exception:
+        logger.exception("Health check: SPARQL endpoint unreachable")
+        sparql_ok = False
+
+    payload = {
+        "status": "healthy" if sparql_ok else "degraded",
         "endpoint": SPARQL_ENDPOINT,
+        "sparql_reachable": sparql_ok,
         "server": "South African Constitution MCP Server",
         "version": "1.0.0"
     }
+    return JSONResponse(content=payload, status_code=200 if sparql_ok else 503)
 
 
 # ----- Root (/) -----
 @app.get("/")
 async def root():
     """Root endpoint – provides server information."""
-    railway_url = "https://mcp.od2og.africa/"
     return {
         "server": "South African Constitution MCP Server",
         "version": "1.0.0",
         "endpoints": {
-            "mcp": f"{railway_url}/mcp",
-            "server_card": f"{railway_url}/.well-known/mcp",
-            "health": f"{railway_url}/health"
+            "mcp": f"{PUBLIC_BASE_URL}/mcp",
+            "server_card": f"{PUBLIC_BASE_URL}/.well-known/mcp",
+            "health": f"{PUBLIC_BASE_URL}/health"
         },
         "documentation": "https://github.com/od2og/constitutionat30"
     }
