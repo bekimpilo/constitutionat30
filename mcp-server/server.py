@@ -1,38 +1,35 @@
-
 """
 MCP Server for the South African Constitution Knowledge Graph.
-Connects to the public TriplyDB SPARQL endpoint.
+Deployed on Railway with static server card support.
 """
 
 import os
-from pathlib import Path
-
+import json
 import httpx
 from dotenv import load_dotenv
+from fastapi import FastAPI, Response
 from mcp.server.fastmcp import FastMCP
+
+# Load environment variables from .env
+load_dotenv()
 
 # Initialize the MCP server
 mcp = FastMCP("South African Constitution Server")
 
-# Load environment variables from the current environment or a local .env file
-load_dotenv()
+# Read SPARQL endpoint from environment
+SPARQL_ENDPOINT = os.getenv(
+    "SPARQL_ENDPOINT",
+    "https://api.triplydb.com/datasets/Od2og/za-constitution/sparql"
+)
 
-SPARQL_ENDPOINT = os.getenv("SPARQL_ENDPOINT")
-if not SPARQL_ENDPOINT:
-    raise RuntimeError("SPARQL_ENDPOINT environment variable is not set. Set it in the environment or a .env file.")
+print(f"🔗 Using SPARQL endpoint: {SPARQL_ENDPOINT}")
+
+
+# ------------------ MCP Tools ------------------
 
 @mcp.tool()
 async def query_constitution(sparql_query: str) -> str:
-    """
-    Execute a SPARQL query against the South African Constitution knowledge graph.
-    The user's natural language question should be converted to SPARQL before calling this tool.
-
-    Args:
-        sparql_query: The SPARQL query string (e.g., "SELECT ?s WHERE { ?s a saont:Section }").
-    
-    Returns:
-        JSON string containing the query results.
-    """
+    """Execute a SPARQL query against the South African Constitution knowledge graph."""
     async with httpx.AsyncClient(timeout=30.0) as client:
         try:
             response = await client.post(
@@ -53,19 +50,9 @@ async def query_constitution(sparql_query: str) -> str:
 
 @mcp.tool()
 async def get_section_text(section_id: str) -> str:
-    """
-    Retrieve the full legal text of a specific section or provision by its identifier.
-    
-    Args:
-        section_id: The section identifier (e.g., "sec:21", "sec:23_2_a", "sec:36_1").
-    
-    Returns:
-        The legal text of the specified provision.
-    """
+    """Retrieve the full legal text of a specific provision by its identifier."""
     query = f"""
     PREFIX saont: <https://od2og.africa/ontology/>
-    PREFIX sec: <https://od2og.africa/constitution/section/>
-
     SELECT ?text WHERE {{
         <{section_id}> saont:legalText ?text .
     }}
@@ -93,19 +80,9 @@ async def get_section_text(section_id: str) -> str:
 
 @mcp.tool()
 async def find_sections_by_keyword(keyword: str) -> str:
-    """
-    Search for sections or provisions that contain a specific keyword in their legal text.
-    
-    Args:
-        keyword: The keyword to search for (e.g., "privacy", "labour", "detention").
-    
-    Returns:
-        A list of matching provision identifiers and their legal texts.
-    """
+    """Search for provisions containing a specific keyword in their legal text."""
     query = f"""
     PREFIX saont: <https://od2og.africa/ontology/>
-    PREFIX sec: <https://od2og.africa/constitution/section/>
-
     SELECT ?provision ?text WHERE {{
         ?provision saont:legalText ?text .
         FILTER(REGEX(LCASE(?text), LCASE("{keyword}"), "i"))
@@ -132,7 +109,6 @@ async def find_sections_by_keyword(keyword: str) -> str:
             for row in bindings:
                 provision = row.get("provision", {}).get("value", "Unknown")
                 text = row.get("text", {}).get("value", "")
-                # Truncate long text for readability
                 if len(text) > 200:
                     text = text[:200] + "..."
                 results.append(f"{provision}: {text}")
@@ -141,5 +117,79 @@ async def find_sections_by_keyword(keyword: str) -> str:
             return f"Error: {str(e)}"
 
 
+# ------------------ FastAPI Wrapper (for Railway) ------------------
+
+# Create a combined ASGI app
+app = FastAPI(title="SA Constitution MCP Server")
+
+# Mount the MCP server under /mcp
+app.mount("/mcp", mcp.streamable_http_app())
+
+
+# Serve the server card at /.well-known/mcp
+@app.get("/.well-known/mcp")
+async def serve_server_card():
+    """Serve the MCP server card for discovery."""
+    railway_url = os.getenv("RAILWAY_PUBLIC_DOMAIN", "https://your-railway-app.railway.app")
+    card = {
+        "$schema": "https://schema.smithery.ai/mcp/server-card/0.0.1/schema.json",
+        "name": "South African Constitution Server",
+        "description": "MCP server for querying the South African Constitution (Ch 1 & 2) via SPARQL.",
+        "version": "1.0.0",
+        "author": {
+            "name": "Od2og",
+            "url": "https://od2og.africa"
+        },
+        "homepage": "https://github.com/od2og/constitutionat30",
+        "repository": {
+            "type": "git",
+            "url": "https://github.com/od2og/constitutionat30"
+        },
+        "license": "MIT",
+        "transport": {
+            "type": "streamable-http",
+            "url": f"{railway_url}/mcp"
+        },
+        "capabilities": {
+            "tools": [
+                {"name": "query_constitution", "description": "Execute any SPARQL query."},
+                {"name": "get_section_text", "description": "Look up a specific provision."},
+                {"name": "find_sections_by_keyword", "description": "Search by keyword."}
+            ]
+        },
+        "configuration": {
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "sparqlEndpoint": {
+                        "type": "string",
+                        "description": "SPARQL endpoint URL"
+                    }
+                }
+            }
+        }
+    }
+    return Response(content=json.dumps(card, indent=2), media_type="application/json")
+
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for Railway."""
+    return {"status": "healthy", "endpoint": SPARQL_ENDPOINT}
+
+
+@app.get("/")
+async def root():
+    """Root endpoint – redirects to server info."""
+    return {
+        "message": "South African Constitution MCP Server",
+        "endpoint": "/mcp",
+        "server_card": "/.well-known/mcp",
+        "health": "/health"
+    }
+
+
 if __name__ == "__main__":
-    mcp.run(transport="streamable-http")
+    import uvicorn
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
