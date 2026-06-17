@@ -1,6 +1,4 @@
----
-
-## 📘 MCP Server README.md (`mcp-server/README.md`)
+## 📘 MCP Server
 
 ```markdown
 # 🇿🇦 South African Constitution – MCP Server
@@ -32,27 +30,7 @@ Tool	Description
 query_constitution	Execute any SPARQL query
 get_section_text	Look up a specific provision (e.g., sec:21)
 find_sections_by_keyword	Search by keyword
-Example prompts for Claude:
 
-"What does section 23 say about labour rights?"
-
-"Which sections protect privacy?"
-
-"List all non‑derogable rights."
-
-🔗 Connect to Claude Desktop
-Add to claude_desktop_config.json:
-
-json
-{
-  "mcpServers": {
-    "za-constitution": {
-      "command": "python",
-      "args": ["/absolute/path/to/mcp-server/server.py"]
-    }
-  }
-}
-Restart Claude Desktop and ask constitutional questions directly.
 
 📦 Dependencies
 mcp – MCP SDK
