@@ -1,6 +1,5 @@
 ## 📘 MCP Server
 
-```markdown
 # 🇿🇦 South African Constitution – MCP Server
 
 MCP server that exposes the Constitution knowledge graph to AI assistants (Claude, etc.) via SPARQL.

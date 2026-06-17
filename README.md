@@ -1,7 +1,6 @@
 # constitution@30
 
 
-markdown
 # 🇿🇦 South African Constitution – Knowledge Graph (Ch 1 & 2)
 
 RDF/Turtle knowledge graph of the South African Constitution, 1996 – **Founding Provisions** (Sections 1–6) and **Bill of Rights** (Sections 7–39).
