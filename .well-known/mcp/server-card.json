@@ -1,47 +1,56 @@
 {
-  "$schema": "https://schema.smithery.ai/mcp/server-card/0.0.1/schema.json",
-  "name": "South African Constitution Server",
-  "description": "MCP server for querying the South African Constitution (Chapters 1 & 2) via SPARQL. Enables constitutional research, FRIA, and GraphRAG applications.",
-  "version": "1.0.0",
-  "author": {
-    "name": "Od2og",
-    "url": "https://github.com/yourusername/za-constitution-kg"
+  "serverInfo": {
+    "name": "South African Constitution Server",
+    "version": "1.0.0"
   },
-  "homepage": "https://github.com/yourusername/za-constitution-kg",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yourusername/za-constitution-kg"
+  "authentication": {
+    "required": false,
+    "schemes": []
   },
-  "license": "MIT",
-  "transport": {
-    "type": "streamable-http",
-    "url": "https://your-deployed-server-url.com/mcp"
-  },
-  "capabilities": {
-    "tools": [
-      {
-        "name": "query_constitution",
-        "description": "Execute a SPARQL query against the South African Constitution knowledge graph."
-      },
-      {
-        "name": "get_section_text",
-        "description": "Retrieve the full legal text of a specific section or provision by its identifier."
-      },
-      {
-        "name": "find_sections_by_keyword",
-        "description": "Search for sections or provisions that contain a specific keyword in their legal text."
+  "tools": [
+    {
+      "name": "query_constitution",
+      "description": "Execute a SPARQL query against the South African Constitution knowledge graph. Converts natural language questions to SPARQL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sparql_query": {
+            "type": "string",
+            "description": "The SPARQL query string to execute (e.g., 'SELECT ?s WHERE { ?s a saont:Section }')"
+          }
+        },
+        "required": ["sparql_query"]
       }
-    ]
-  },
-  "configuration": {
-    "schema": {
-      "type": "object",
-      "properties": {
-        "sparqlEndpoint": {
-          "type": "string",
-          "description": "SPARQL endpoint URL (defaults to TriplyDB public endpoint)"
-        }
+    },
+    {
+      "name": "get_section_text",
+      "description": "Retrieve the full legal text of a specific section or provision by its identifier.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "section_id": {
+            "type": "string",
+            "description": "The section identifier (e.g., 'sec:21', 'sec:23_2_a', 'sec:36_1')"
+          }
+        },
+        "required": ["section_id"]
+      }
+    },
+    {
+      "name": "find_sections_by_keyword",
+      "description": "Search for sections or provisions that contain a specific keyword in their legal text.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "The keyword to search for (e.g., 'privacy', 'labour', 'detention')"
+          }
+        },
+        "required": ["keyword"]
       }
     }
-  }
+  ],
+  "resources": [],
+  "prompts": []
 }
