@@ -58,11 +58,29 @@ def _escape_sparql_string_literal(value: str) -> str:
 
 
 # ============================================
-# MCP TOOLS
+# MCP TOOLS (with annotations and output schemas)
 # ============================================
 
-@mcp.tool()
-async def query_constitution(sparql_query: str) -> str:
+@mcp.tool(
+    name="sparql",
+    description="Execute a SPARQL query against the South African Constitution knowledge graph.",
+    annotations={
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+        "openWorldHint": True
+    },
+    outputSchema={
+        "type": "object",
+        "properties": {
+            "result": {
+                "type": "string",
+                "description": "The SPARQL query results in JSON format."
+            }
+        }
+    }
+)
+async def sparql(sparql_query: str) -> str:
     """
     Execute a SPARQL query against the South African Constitution knowledge graph.
     The user's natural language question should be converted to SPARQL before calling this tool.
@@ -86,15 +104,33 @@ async def query_constitution(sparql_query: str) -> str:
             response.raise_for_status()
             return response.text
         except httpx.HTTPStatusError as e:
-            logger.warning("query_constitution HTTP error %s: %s", e.response.status_code, e.response.text)
+            logger.warning("sparql HTTP error %s: %s", e.response.status_code, e.response.text)
             return f"HTTP error: {e.response.status_code}"
         except Exception:
-            logger.exception("query_constitution failed for query: %s", sparql_query)
+            logger.exception("sparql failed for query: %s", sparql_query)
             return "Error executing query."
 
 
-@mcp.tool()
-async def get_section_text(section_id: str) -> str:
+@mcp.tool(
+    name="get_text",
+    description="Retrieve the full legal text of a specific provision by its identifier (e.g., 'sec:21', 'sec:23_2_a').",
+    annotations={
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+        "openWorldHint": True
+    },
+    outputSchema={
+        "type": "object",
+        "properties": {
+            "text": {
+                "type": "string",
+                "description": "The full legal text of the requested provision."
+            }
+        }
+    }
+)
+async def get_text(section_id: str) -> str:
     """
     Retrieve the full legal text of a specific section or provision by its identifier.
 
@@ -141,12 +177,36 @@ async def get_section_text(section_id: str) -> str:
                 return bindings[0].get("text", {}).get("value", "No text found.")
             return "No text found for that identifier."
         except Exception:
-            logger.exception("get_section_text failed for section_id: %s", section_id)
+            logger.exception("get_text failed for section_id: %s", section_id)
             return "Error retrieving section text."
 
 
-@mcp.tool()
-async def find_sections_by_keyword(keyword: str) -> str:
+@mcp.tool(
+    name="search",
+    description="Search all constitutional provisions for a keyword (e.g., 'privacy', 'labour', 'detention') and return matching texts.",
+    annotations={
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+        "openWorldHint": True
+    },
+    outputSchema={
+        "type": "object",
+        "properties": {
+            "matches": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "provision": {"type": "string", "description": "The provision identifier."},
+                        "text": {"type": "string", "description": "The matching legal text."}
+                    }
+                }
+            }
+        }
+    }
+)
+async def search(keyword: str) -> str:
     """
     Search for sections or provisions that contain a specific keyword in their legal text.
 
@@ -192,7 +252,7 @@ async def find_sections_by_keyword(keyword: str) -> str:
                 results.append(f"{provision}: {text}")
             return "\n\n".join(results)
         except Exception:
-            logger.exception("find_sections_by_keyword failed for keyword: %s", keyword)
+            logger.exception("search failed for keyword: %s", keyword)
             return "Error executing keyword search."
 
 
@@ -222,8 +282,8 @@ async def serve_server_card():
         },
         "tools": [
             {
-                "name": "query_constitution",
-                "description": "Execute a SPARQL query against the South African Constitution knowledge graph. Converts natural language questions to SPARQL.",
+                "name": "sparql",
+                "description": "Execute a SPARQL query against the South African Constitution knowledge graph.",
                 "inputSchema": {
                     "type": "object",
                     "properties": {
@@ -236,8 +296,8 @@ async def serve_server_card():
                 }
             },
             {
-                "name": "get_section_text",
-                "description": "Retrieve the full legal text of a specific section or provision by its identifier.",
+                "name": "get_text",
+                "description": "Retrieve the full legal text of a specific provision by its identifier (e.g., 'sec:21', 'sec:23_2_a').",
                 "inputSchema": {
                     "type": "object",
                     "properties": {
@@ -250,8 +310,8 @@ async def serve_server_card():
                 }
             },
             {
-                "name": "find_sections_by_keyword",
-                "description": "Search for sections or provisions that contain a specific keyword in their legal text.",
+                "name": "search",
+                "description": "Search all constitutional provisions for a keyword (e.g., 'privacy', 'labour', 'detention') and return matching texts.",
                 "inputSchema": {
                     "type": "object",
                     "properties": {
@@ -268,6 +328,69 @@ async def serve_server_card():
         "prompts": []
     }
 
+    return Response(content=json.dumps(card, indent=2), media_type="application/json")
+
+
+# ----- Server Card (exact path for Smithery) -----
+@app.get("/.well-known/mcp/server-card.json")
+async def serve_server_card_exact():
+    """Serve the MCP server card at the exact path Smithery expects."""
+    card = {
+        "serverInfo": {
+            "name": "South African Constitution Server",
+            "version": "1.0.0"
+        },
+        "authentication": {
+            "required": False,
+            "schemes": []
+        },
+        "tools": [
+            {
+                "name": "sparql",
+                "description": "Execute a SPARQL query against the South African Constitution knowledge graph.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "sparql_query": {
+                            "type": "string",
+                            "description": "The SPARQL query string to execute"
+                        }
+                    },
+                    "required": ["sparql_query"]
+                }
+            },
+            {
+                "name": "get_text",
+                "description": "Retrieve the full legal text of a specific provision by its identifier.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "section_id": {
+                            "type": "string",
+                            "description": "The section identifier (e.g., 'sec:21')"
+                        }
+                    },
+                    "required": ["section_id"]
+                }
+            },
+            {
+                "name": "search",
+                "description": "Search for provisions containing a specific keyword.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "keyword": {
+                            "type": "string",
+                            "description": "The keyword to search for"
+                        }
+                    },
+                    "required": ["keyword"]
+                }
+            }
+        ],
+        "resources": [],
+        "prompts": []
+    }
     return Response(content=json.dumps(card, indent=2), media_type="application/json")
 
 
@@ -304,70 +427,7 @@ async def health_check():
     }
     return JSONResponse(content=payload, status_code=200 if sparql_ok else 503)
 
-#------------updated server-card-----------------------------------------
 
-@app.get("/.well-known/mcp/server-card.json")
-async def serve_server_card():
-    """Serve the MCP server card for discovery."""
-    card = {
-        "serverInfo": {
-            "name": "South African Constitution Server",
-            "version": "1.0.0"
-        },
-        "authentication": {
-            "required": False,
-            "schemes": []
-        },
-        "tools": [
-            {
-                "name": "query_constitution",
-                "description": "Execute a SPARQL query against the South African Constitution knowledge graph.",
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {
-                        "sparql_query": {
-                            "type": "string",
-                            "description": "The SPARQL query string to execute"
-                        }
-                    },
-                    "required": ["sparql_query"]
-                }
-            },
-            {
-                "name": "get_section_text",
-                "description": "Retrieve the full legal text of a specific section or provision by its identifier.",
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {
-                        "section_id": {
-                            "type": "string",
-                            "description": "The section identifier (e.g., 'sec:21')"
-                        }
-                    },
-                    "required": ["section_id"]
-                }
-            },
-            {
-                "name": "find_sections_by_keyword",
-                "description": "Search for provisions containing a specific keyword.",
-                "inputSchema": {
-                    "type": "object",
-                    "properties": {
-                        "keyword": {
-                            "type": "string",
-                            "description": "The keyword to search for"
-                        }
-                    },
-                    "required": ["keyword"]
-                }
-            }
-        ],
-        "resources": [],
-        "prompts": []
-    }
-    return Response(content=json.dumps(card, indent=2), media_type="application/json")
-
-# ----- Root (/) -----
 @app.get("/")
 async def root():
     """Root endpoint – provides server information."""
@@ -377,11 +437,11 @@ async def root():
         "endpoints": {
             "mcp": f"{PUBLIC_BASE_URL}/mcp",
             "server_card": f"{PUBLIC_BASE_URL}/.well-known/mcp",
+            "server_card_json": f"{PUBLIC_BASE_URL}/.well-known/mcp/server-card.json",
             "health": f"{PUBLIC_BASE_URL}/health"
         },
         "documentation": "https://github.com/od2og/constitutionat30"
     }
-
 
 # ============================================
 # RUN THE SERVER
