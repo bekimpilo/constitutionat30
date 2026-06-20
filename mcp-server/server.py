@@ -304,6 +304,68 @@ async def health_check():
     }
     return JSONResponse(content=payload, status_code=200 if sparql_ok else 503)
 
+#------------updated server-card-----------------------------------------
+
+@app.get("/.well-known/mcp/server-card.json")
+async def serve_server_card():
+    """Serve the MCP server card for discovery."""
+    card = {
+        "serverInfo": {
+            "name": "South African Constitution Server",
+            "version": "1.0.0"
+        },
+        "authentication": {
+            "required": False,
+            "schemes": []
+        },
+        "tools": [
+            {
+                "name": "query_constitution",
+                "description": "Execute a SPARQL query against the South African Constitution knowledge graph.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "sparql_query": {
+                            "type": "string",
+                            "description": "The SPARQL query string to execute"
+                        }
+                    },
+                    "required": ["sparql_query"]
+                }
+            },
+            {
+                "name": "get_section_text",
+                "description": "Retrieve the full legal text of a specific section or provision by its identifier.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "section_id": {
+                            "type": "string",
+                            "description": "The section identifier (e.g., 'sec:21')"
+                        }
+                    },
+                    "required": ["section_id"]
+                }
+            },
+            {
+                "name": "find_sections_by_keyword",
+                "description": "Search for provisions containing a specific keyword.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "keyword": {
+                            "type": "string",
+                            "description": "The keyword to search for"
+                        }
+                    },
+                    "required": ["keyword"]
+                }
+            }
+        ],
+        "resources": [],
+        "prompts": []
+    }
+    return Response(content=json.dumps(card, indent=2), media_type="application/json")
 
 # ----- Root (/) -----
 @app.get("/")
