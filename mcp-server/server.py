@@ -58,7 +58,7 @@ def _escape_sparql_string_literal(value: str) -> str:
 
 
 # ============================================
-# MCP TOOLS (with annotations and output schemas)
+# MCP TOOLS 
 # ============================================
 
 @mcp.tool(
@@ -69,15 +69,6 @@ def _escape_sparql_string_literal(value: str) -> str:
         "destructiveHint": False,
         "idempotentHint": True,
         "openWorldHint": True
-    },
-    outputSchema={
-        "type": "object",
-        "properties": {
-            "result": {
-                "type": "string",
-                "description": "The SPARQL query results in JSON format."
-            }
-        }
     }
 )
 async def sparql(sparql_query: str) -> str:
@@ -119,15 +110,6 @@ async def sparql(sparql_query: str) -> str:
         "destructiveHint": False,
         "idempotentHint": True,
         "openWorldHint": True
-    },
-    outputSchema={
-        "type": "object",
-        "properties": {
-            "text": {
-                "type": "string",
-                "description": "The full legal text of the requested provision."
-            }
-        }
     }
 )
 async def get_text(section_id: str) -> str:
@@ -189,21 +171,6 @@ async def get_text(section_id: str) -> str:
         "destructiveHint": False,
         "idempotentHint": True,
         "openWorldHint": True
-    },
-    outputSchema={
-        "type": "object",
-        "properties": {
-            "matches": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "provision": {"type": "string", "description": "The provision identifier."},
-                        "text": {"type": "string", "description": "The matching legal text."}
-                    }
-                }
-            }
-        }
     }
 )
 async def search(keyword: str) -> str:
